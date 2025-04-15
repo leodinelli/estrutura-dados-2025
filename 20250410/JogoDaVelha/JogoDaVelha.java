@@ -32,35 +32,75 @@ public class JogoDaVelha {
     }
 
     public boolean eVencedor(int marca) {
-        return (
-            (tabuleiro[0][0] + tabuleiro[0][1] + tabuleiro[0][2] == marca * 3) || // linha 0
-            (tabuleiro[1][0] + tabuleiro[1][1] + tabuleiro[1][2] == marca * 3) || // linha 1
-            (tabuleiro[2][0] + tabuleiro[2][1] + tabuleiro[2][2] == marca * 3) || // linha 2
-            (tabuleiro[0][0] + tabuleiro[1][0] + tabuleiro[2][0] == marca * 3) || // coluna 0
-            (tabuleiro[0][1] + tabuleiro[1][1] + tabuleiro[2][1] == marca * 3) || // coluna 1
-            (tabuleiro[0][2] + tabuleiro[1][2] + tabuleiro[2][2] == marca * 3) || // coluna 2
-            (tabuleiro[0][0] + tabuleiro[1][1] + tabuleiro[2][2] == marca * 3) || // diagonal
-            (tabuleiro[2][0] + tabuleiro[1][1] + tabuleiro[0][2] == marca * 3)    // diagonal
-        );
+        int tamanho = tabuleiro.length;
+    
+        // verifica cada linha
+        for (int i = 0; i < tamanho; i++) {
+            int soma = 0;
+            for (int j = 0; j < tamanho; j++) {
+                soma += tabuleiro[i][j];
+            }
+            if (soma == marca * tamanho) {
+                return true;
+            }
+        }
+    
+        // verifica cada coluna
+        for (int j = 0; j < tamanho; j++) {
+            int soma = 0;
+            for (int i = 0; i < tamanho; i++) {
+                soma += tabuleiro[i][j];
+            }
+            if (soma == marca * tamanho) {
+                return true;
+            }
+        }
+    
+        // verifica diagonal 1
+        int somaDiagonal_1 = 0;
+        for (int i = 0; i < tamanho; i++) {
+            somaDiagonal_1 += tabuleiro[i][i];
+        }
+        if (somaDiagonal_1 == marca * tamanho) {
+            return true;
+        }
+    
+        // verifica diagonal 2
+        int somaDiagonal_2 = 0;
+        for (int i = 0; i < tamanho; i++) {
+            somaDiagonal_2 += tabuleiro[i][tamanho - 1 - i];
+        }
+        if (somaDiagonal_2 == marca * tamanho) {
+            return true;
+        }
+    
+        
+        return false;
     }
+    
 
     public int vencedor() {
+        // verifica x 
         if (eVencedor(X)) {
             return X;
         }
-
+    
+        // verifica O
         if (eVencedor(O)) {
             return O;
         }
-
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+    
+        // verifica os espaços vazios do jogo
+        int tamanho = tabuleiro.length;
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
                 if (tabuleiro[i][j] == VAZIO) {
-                    return 0;
+                    return 0; // significa que ainda tem jogadas
                 }
             }
         }
-
+    
+        // empate deu velha hahaha
         return 2;
     }
 

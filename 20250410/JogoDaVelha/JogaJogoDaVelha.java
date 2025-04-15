@@ -28,14 +28,14 @@ public class JogaJogoDaVelha {
         
             int resultado = jogo.vencedor();
             if (resultado == JogoDaVelha.X) {
-                System.out.println("O jogador X venceu!");
+                System.out.println("Jogador X é o Vencedor, Parabéns!!");
             } else if (resultado == JogoDaVelha.O) {
-                System.out.println("O jogador O venceu!");
+                System.out.println("Jogador O é o Vencedor, Parabéns!!");
             } else {
-                System.out.println("O jogo terminou em empate!");
+                System.out.println("O jogo foi definido por um empate!!");
             }
 
-            // jogar de novo
+            // jogar de novo    
             System.out.print("Deseja jogar novamente? (s/n): ");
             String resposta = entrada.next();
             if (!resposta.equalsIgnoreCase("s")) {
