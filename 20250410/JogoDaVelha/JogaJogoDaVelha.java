@@ -7,14 +7,14 @@ public class JogaJogoDaVelha {
         Random aleatorio = new Random();
         boolean jogarDeNovo = true;
 
-        System.out.print("Digite o tamanho do tabuleiro (ímpar e >= 3): ");
+        System.out.print("Digite o tamanho do tabuleiro: ");
         int tamanho;
         while (true) {
             tamanho = entrada.nextInt();
             if (tamanho >= 3 && tamanho % 2 == 1) {
                 break;
             } else {
-                System.out.print("Valor inválido. Digite um número ímpar e >= 3: ");
+                System.out.print("Tamanho inválido. Digite números impares:");
             }
         }
 
