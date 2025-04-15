@@ -3,16 +3,18 @@ public class JogoDaVelha {
     protected static final int X = 1, O = -1;
     protected static final int VAZIO = 0;
 
-    protected int tabuleiro[][] = new int[3][3];
+    protected int[][] tabuleiro;
     protected int jogador;
 
-    public JogoDaVelha() {
+    public JogoDaVelha(int tamanho) {
+        tabuleiro = new int[tamanho][tamanho];
         limpaTabuleiro();
     }
 
     public void limpaTabuleiro() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        int tamanho = tabuleiro.length;
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
                 tabuleiro[i][j] = VAZIO;
             }
         }
@@ -20,7 +22,7 @@ public class JogoDaVelha {
     }
 
     public void poePeca(int i, int j) {
-        if (i < 0 || i > 2 || j < 0 || j > 2) {
+        if (i < 0 || i >= tabuleiro.length || j < 0 || j >= tabuleiro.length) {
             throw new IllegalArgumentException("Posição Inválida");
         }
 
@@ -33,7 +35,7 @@ public class JogoDaVelha {
 
     public boolean eVencedor(int marca) {
         int tamanho = tabuleiro.length;
-    
+
         // verifica cada linha
         for (int i = 0; i < tamanho; i++) {
             int soma = 0;
@@ -44,7 +46,7 @@ public class JogoDaVelha {
                 return true;
             }
         }
-    
+
         // verifica cada coluna
         for (int j = 0; j < tamanho; j++) {
             int soma = 0;
@@ -55,8 +57,8 @@ public class JogoDaVelha {
                 return true;
             }
         }
-    
-        // verifica diagonal 1
+
+        // verifica diagonal principal
         int somaDiagonal_1 = 0;
         for (int i = 0; i < tamanho; i++) {
             somaDiagonal_1 += tabuleiro[i][i];
@@ -64,8 +66,8 @@ public class JogoDaVelha {
         if (somaDiagonal_1 == marca * tamanho) {
             return true;
         }
-    
-        // verifica diagonal 2
+
+        // verifica diagonal secundária
         int somaDiagonal_2 = 0;
         for (int i = 0; i < tamanho; i++) {
             somaDiagonal_2 += tabuleiro[i][tamanho - 1 - i];
@@ -73,61 +75,66 @@ public class JogoDaVelha {
         if (somaDiagonal_2 == marca * tamanho) {
             return true;
         }
-    
-        
+
         return false;
     }
-    
 
     public int vencedor() {
-        // verifica x 
+        // verifica X
         if (eVencedor(X)) {
             return X;
         }
-    
+
         // verifica O
         if (eVencedor(O)) {
             return O;
         }
-    
-        // verifica os espaços vazios do jogo
+
+        // verifica se ainda tem jogadas
         int tamanho = tabuleiro.length;
         for (int i = 0; i < tamanho; i++) {
             for (int j = 0; j < tamanho; j++) {
                 if (tabuleiro[i][j] == VAZIO) {
-                    return 0; // significa que ainda tem jogadas
+                    return 0;
                 }
             }
         }
-    
-        // empate deu velha hahaha
+
+        // empate
         return 2;
     }
 
     public String toString() {
-        String retorno = "";
+        StringBuilder retorno = new StringBuilder();
+        int tamanho = tabuleiro.length;
 
-        for (int i = 0; i <= 2; i++) {
-            for (int j = 0; j <= 2; j++) {
+        for (int i = 0; i < tamanho; i++) {
+            for (int j = 0; j < tamanho; j++) {
                 if (tabuleiro[i][j] == X) {
-                    retorno += "X";
+                    retorno.append("X");
                 } else if (tabuleiro[i][j] == O) {
-                    retorno += "O";
+                    retorno.append("O");
                 } else {
-                    retorno += " ";
+                    retorno.append(" ");
                 }
 
-                if (j < 2) {
-                    retorno += "|";
+                if (j < tamanho - 1) {
+                    retorno.append("|");
                 }
             }
 
-            if (i < 2) {
-                retorno += "\n-+-+-\n";
+            if (i < tamanho - 1) {
+                retorno.append("\n");
+                for (int j = 0; j < tamanho; j++) {
+                    retorno.append("-");
+                    if (j < tamanho - 1) {
+                        retorno.append("+");
+                    }
+                }
+                retorno.append("\n");
             }
         }
 
-        return retorno;
+        return retorno.toString();
     }
-
 }

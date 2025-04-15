@@ -7,12 +7,23 @@ public class JogaJogoDaVelha {
         Random aleatorio = new Random();
         boolean jogarDeNovo = true;
 
+        System.out.print("Digite o tamanho do tabuleiro (ímpar e >= 3): ");
+        int tamanho;
+        while (true) {
+            tamanho = entrada.nextInt();
+            if (tamanho >= 3 && tamanho % 2 == 1) {
+                break;
+            } else {
+                System.out.print("Valor inválido. Digite um número ímpar e >= 3: ");
+            }
+        }
+
         while (jogarDeNovo) {
-            JogoDaVelha jogo = new JogoDaVelha();
+            JogoDaVelha jogo = new JogoDaVelha(tamanho);
 
             while (jogo.vencedor() == 0) {
-                int linha = aleatorio.nextInt(3);   
-                int coluna = aleatorio.nextInt(3);
+                int linha = aleatorio.nextInt(tamanho);   
+                int coluna = aleatorio.nextInt(tamanho);
 
                 try {
                     jogo.poePeca(linha, coluna); // tenta jogar
@@ -25,7 +36,6 @@ public class JogaJogoDaVelha {
             System.out.println("Tabuleiro final:");
             System.out.println(jogo.toString());
 
-        
             int resultado = jogo.vencedor();
             if (resultado == JogoDaVelha.X) {
                 System.out.println("Jogador X é o Vencedor, Parabéns!!");
