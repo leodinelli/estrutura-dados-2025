@@ -7,7 +7,7 @@ class DoubleLinkedList:
         self._len = 0
         
     def append(self, value):
-        new = Node(self, previous=self.tail)
+        new = Node(value, previous=self.tail)
         if self.tail:
             self.tail.next=new
         else:
@@ -16,7 +16,7 @@ class DoubleLinkedList:
         self._len +=1
 
     def prepend(self, value):
-        new = Node(self, next=self.head)
+        new = Node(value, next=self.head)
         if self.head:
             self.head.previous = new
         else:
@@ -31,10 +31,9 @@ class DoubleLinkedList:
             cur = cur.next
     
     def __repr__(self):
-        valor = ""
-        cur = self.head
-        while cur:
-            valor=", ".join(cur.data)
-            cur = cur.next
-        return valor
+        elems = ", ".join(map(str,self))
+        return f"[{elems}] :: (len={self._len})"
+    
+    def __len__(self):
+        return self._len
         
