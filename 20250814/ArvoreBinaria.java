@@ -14,12 +14,23 @@ public class ArvoreBinaria implements Arvore {
     
     @Override
     public void inserir(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'inserir'");
+        this.raiz = inserirRecursivo(this.raiz, valor);
+    }
+
+    private NodoArvore inserirRecursivo(NodoArvore noAtual, int valor) {
+        if (noAtual == null) {
+            return new NodoArvore(valor); 
+        }
+
+        if (valor < noAtual.chave) {
+            noAtual.filhoEsquerda = inserirRecursivo(noAtual.filhoEsquerda, valor);
+        }
+        else {
+            noAtual.filhoDireita = inserirRecursivo(noAtual.filhoDireita, valor);
+        }
+        return noAtual;
     }
     
-
-
     // --- MÉTODO DE PESQUISA ---
     // Esse método é um modelo do tipo de recursão que pode 
     // ser utilizado para implementar a pesquisa 
