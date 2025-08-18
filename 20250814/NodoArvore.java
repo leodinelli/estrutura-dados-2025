@@ -1,7 +1,7 @@
 public class NodoArvore {
-    private NodoArvore filhoEsquerda;
-    private int chave;
-    private NodoArvore filhoDireita;
+    public NodoArvore filhoEsquerda;
+    public int chave;
+    public NodoArvore filhoDireita;
 
     private NodoArvore(int chave) {
         this.chave = chave;
