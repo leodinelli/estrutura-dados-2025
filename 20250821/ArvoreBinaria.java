@@ -96,6 +96,12 @@ public class ArvoreBinaria implements Arvore {
      */
     @Override
     public void imprimePreFixado() {
+        imprimePreFixadoRecursivo(this.raiz);
+    }
+
+    @Override
+    public void imprimePosFixado() {
+        imprimePosFixadoRecursivo(this.raiz);
     }
     
     /**
@@ -103,6 +109,28 @@ public class ArvoreBinaria implements Arvore {
      * @param no O nó raiz da subárvore a ser impressa.
      */
     private void imprimePreFixadoRecursivo(NodoArvore no) {
+        if (no!= null){
+            System.out.print(no.chave + "");
+            imprimePreFixado(no.filhoEsquerdo);
+            imprimePreFixado(no.filhoDireito);
+        }
     }
+
+    private void imprimePosFixadoRecursivo(NodoArvore no) {
+        if (no!= null){
+            imprimePreFixado(no.filhoEsquerdo);
+            imprimePreFixado(no.filhoDireito);
+            System.out.print(no.chave + "");
+        }
+    }
+
+    private void imprimeOrdem (NodoArvore nodoAtual){
+        if (nodoAtual !=null) {
+            imprimeOrdemRecursivo(noAtual.filhoEsquerdo);
+            System.out.print(noAtual.chave + "");
+            imprimeOrdemRecursivo(noAtual.filhoDireito);
+        }
+    }
+
 
 }
