@@ -13,6 +13,24 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
     public ArvoreBinaria() {
         this.raiz = null;
     }
+        public static void main(String[] args) {
+            System.out.println("Iniciando programa...");
+            ArvoreBinaria<Like> arvore = new ArvoreBinaria<>();
+            java.util.Random rand = new java.util.Random();
+            System.out.println("Inserindo 10 objetos Like na arvore:");
+            for (int i = 0; i < 10; i++) {
+                Like like = new Like();
+                long id = rand.nextInt(100);
+                like.setId(id);
+                System.out.println("Inserindo Like com id: " + id);
+                arvore.inserir(like);
+            }
+            System.out.println("Pre-fixado:");
+            arvore.imprimePreFixado();
+            System.out.println("\nEm ordem:");
+            arvore.imprimeEmOrdem();
+            System.out.println("Programa finalizado.");
+        }
 
     // --- MÉTODO DE INSERÇÃO ---
 
@@ -114,7 +132,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
      */
     private void imprimePreFixadoRecursivo(NodoArvore<T> no) {
         if (no != null) {
-            System.out.print(no.objeto + " ");
+            System.out.println(no.objeto);
             imprimePreFixadoRecursivo(no.filhoEsquerda);
             imprimePreFixadoRecursivo(no.filhoDireita);
         }
@@ -138,7 +156,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
         if (no != null) {
             imprimePosFixadoRecursivo(no.filhoEsquerda);
             imprimePosFixadoRecursivo(no.filhoDireita);
-            System.out.print(no.objeto + " ");
+            System.out.println(no.objeto);
         }
     }
 
@@ -158,7 +176,7 @@ public class ArvoreBinaria<T extends Comparable<T>> implements Arvore<T> {
     private void imprimeEmOrdemRecursivo(NodoArvore<T> no) {
         if (no != null) {
             imprimeEmOrdemRecursivo(no.filhoEsquerda);
-            System.out.print(no.objeto + " ");
+            System.out.println(no.objeto);
             imprimeEmOrdemRecursivo(no.filhoDireita);
         }
     }
